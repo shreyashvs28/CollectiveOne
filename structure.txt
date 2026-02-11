@@ -1,0 +1,76 @@
+hr-interview-simulator/
+│
+├── public/
+│   └── favicon.svg
+│
+├── src/
+│   │
+│   ├── assets/
+│   │   ├── icons/
+│   │   └── images/
+│   │
+│   ├── components/
+│   │   ├── common/
+│   │   │   ├── Button.tsx
+│   │   │   ├── Card.tsx
+│   │   │   └── Loader.tsx
+│   │   │
+│   │   ├── interview/
+│   │   │   ├── InterviewHeader.tsx
+│   │   │   ├── InterviewControls.tsx
+│   │   │   ├── QuestionPrompt.tsx
+│   │   │   ├── TranscriptBox.tsx
+│   │   │   └── Timer.tsx
+│   │   │
+│   │   ├── analysis/
+│   │   │   ├── AudioAnalysisPanel.tsx
+│   │   │   ├── ConfidenceMeter.tsx
+│   │   │   └── FacialIndicator.tsx
+│   │   │
+│   │   └── report/
+│   │       ├── ReportSummary.tsx
+│   │       ├── CommunicationScore.tsx
+│   │       └── Suggestions.tsx
+│   │
+│   ├── hooks/
+│   │   ├── useSpeechRecognition.ts
+│   │   ├── useSpeechSynthesis.ts
+│   │   ├── useInterviewFlow.ts
+│   │   ├── useAudioAnalysis.ts
+│   │   └── useWebcam.ts
+│   │
+│   ├── pages/
+│   │   ├── HomePage.tsx
+│   │   ├── InterviewPage.tsx
+│   │   └── ReportPage.tsx
+│   │
+│   ├── services/
+│   │   ├── speechService.ts
+│   │   ├── audioService.ts
+│   │   └── webcamService.ts
+│   │
+│   ├── utils/
+│   │   ├── interviewQuestions.ts
+│   │   ├── scoring.ts
+│   │   ├── constants.ts
+│   │   └── helpers.ts
+│   │
+│   ├── types/
+│   │   ├── interview.ts
+│   │   ├── analysis.ts
+│   │   └── report.ts
+│   │
+│   ├── styles/
+│   │   └── theme.css
+│   │
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── index.css
+│
+├── .gitignore
+├── index.html
+├── package.json
+├── tsconfig.json
+├── tsconfig.node.json
+├── vite.config.ts
+└── README.md
