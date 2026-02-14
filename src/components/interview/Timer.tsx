@@ -1,16 +1,13 @@
 import React from "react";
 
-type TimerProps = {
-  seconds: number;
+type Props = {
+  time: string;
 };
 
-const Timer: React.FC<TimerProps> = ({ seconds }) => {
-  const minutes = Math.floor(seconds / 60);
-  const remainingSeconds = seconds % 60;
-
+const Timer: React.FC<Props> = ({ time }) => {
   return (
-    <span className="text-muted">
-      Time: {minutes}:{remainingSeconds.toString().padStart(2, "0")}
+    <span className="badge bg-secondary">
+      {time}
     </span>
   );
 };

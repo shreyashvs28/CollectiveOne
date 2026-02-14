@@ -1,44 +1,86 @@
-import React from "react";
+import React, { useMemo } from "react";
+import { useInterview } from "../context/InterviewContext";
 import ReportSummary from "../components/report/ReportSummary";
 import CommunicationScore from "../components/report/CommunicationScore";
 import Suggestions from "../components/report/Suggestions";
-import Button from "../components/common/Button";
+import ReportActions from "../components/report/ReportActions";
+import {
+  calculateAudioConfidence,
+  calculateOverallConfidence,
+} from "../utils/scoring";
+import {
+  buildSpeechRateTrend,
+  buildStabilityTrend,
+} from "../utils/graphHelpers";
 
-type ReportPageProps = {
+type Props = {
   onRestart: () => void;
 };
 
-const ReportPage: React.FC<ReportPageProps> = ({ onRestart }) => {
+const ReportPage: React.FC<Props> = ({ onRestart }) => {
+  const { state, resetInterview } = useInterview();
+
+  const reportData = useMemo(() => {
+    const answers = state.answers;
+
+    const audioScores = answers.map((a) =>
+      calculateAudioConfidence(a.audioMetrics!)
+    );
+
+    const avgAudio =
+      audioScores.reduce((a, b) => a + b, 0) /
+      (audioScores.length || 1);
+
+    const overall = calculateOverallConfidence(avgAudio, {
+      stabilityScore: 80,
+    });
+
+    const suggestions: string[] = [];
+
+    if (avgAudio < 60)
+      suggestions.push(
+        "Improve clarity and reduce filler words."
+      );
+
+    if (overall < 70)
+      suggestions.push(
+        "Maintain consistent eye contact and delivery pace."
+      );
+
+    return {
+      overall,
+      avgAudio,
+      suggestions,
+      speechTrend: buildSpeechRateTrend(answers),
+      stabilityTrend: buildStabilityTrend(answers),
+    };
+  }, [state.answers]);
+
   return (
-    <div className="container mt-5">
+    <div className="container mt-4">
       <ReportSummary
-        role="Software Engineer"
-        overallScore={72}
+        candidateName={state.basicDetails.name}
+        role={state.basicDetails.role}
+        overallScore={reportData.overall}
+        interviewDate={new Date().toLocaleDateString()}
       />
 
       <div className="my-4">
         <CommunicationScore
-          clarity={75}
-          confidence={68}
+          clarity={reportData.avgAudio}
+          confidence={reportData.overall}
           structure={70}
         />
       </div>
 
-      <div className="mb-4">
-        <Suggestions
-          suggestions={[
-            "Provide more concrete examples when answering behavioral questions.",
-            "Reduce filler words during longer responses.",
-            "Maintain consistent pacing throughout the answer.",
-          ]}
-        />
-      </div>
+      <Suggestions suggestions={reportData.suggestions} />
 
-      <div className="text-center">
-        <Button onClick={onRestart} variant="secondary">
-          Restart Interview
-        </Button>
-      </div>
+      <ReportActions
+        onRestart={() => {
+          resetInterview();
+          onRestart();
+        }}
+      />
     </div>
   );
 };

@@ -1,28 +1,24 @@
 import React from "react";
 import Card from "../common/Card";
 
-type SuggestionsProps = {
+type Props = {
   suggestions: string[];
 };
 
-const Suggestions: React.FC<SuggestionsProps> = ({ suggestions }) => {
-  if (suggestions.length === 0) {
-    return (
-      <Card title="Improvement Suggestions">
-        <p className="mb-0 text-muted">
-          No specific improvement areas were identified in this session.
-        </p>
-      </Card>
-    );
-  }
-
+const Suggestions: React.FC<Props> = ({ suggestions }) => {
   return (
-    <Card title="Improvement Suggestions">
-      <ul className="mb-0">
-        {suggestions.map((item, index) => (
-          <li key={index}>{item}</li>
-        ))}
-      </ul>
+    <Card title="Improvement Recommendations">
+      {suggestions.length === 0 ? (
+        <p className="text-muted mb-0">
+          No major improvement areas identified.
+        </p>
+      ) : (
+        <ul className="mb-0">
+          {suggestions.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
+      )}
     </Card>
   );
 };

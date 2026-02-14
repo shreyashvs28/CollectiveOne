@@ -1,21 +1,21 @@
 import React from "react";
 import Button from "../common/Button";
 
-type InterviewControlsProps = {
+type Props = {
+  isListening: boolean;
   onStart: () => void;
   onStop: () => void;
   onNext: () => void;
-  isListening: boolean;
 };
 
-const InterviewControls: React.FC<InterviewControlsProps> = ({
+const InterviewControls: React.FC<Props> = ({
+  isListening,
   onStart,
   onStop,
   onNext,
-  isListening,
 }) => {
   return (
-    <div className="d-flex gap-2 justify-content-end">
+    <div className="d-flex justify-content-end gap-2 mt-3">
       {!isListening ? (
         <Button onClick={onStart}>Start Answer</Button>
       ) : (
@@ -23,6 +23,7 @@ const InterviewControls: React.FC<InterviewControlsProps> = ({
           Stop Answer
         </Button>
       )}
+
       <Button variant="secondary" onClick={onNext}>
         Next Question
       </Button>

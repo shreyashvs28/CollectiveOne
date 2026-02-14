@@ -7,7 +7,7 @@ export const createSpeechRecognition = () => {
 
   if (!SpeechRecognition) return null;
 
-  const recognition: InstanceType<typeof SpeechRecognition> = new SpeechRecognition();
+  const recognition = new SpeechRecognition();
   recognition.continuous = true;
   recognition.interimResults = true;
   recognition.lang = "en-US";
@@ -18,12 +18,13 @@ export const createSpeechRecognition = () => {
 export const speakText = (text: string) => {
   if (!window.speechSynthesis) return;
 
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = "en-US";
-  utterance.rate = 1;
-  utterance.pitch = 1;
-
   window.speechSynthesis.cancel();
+
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.rate = 0.95;
+  utterance.pitch = 1;
+  utterance.lang = "en-US";
+
   window.speechSynthesis.speak(utterance);
 };
 

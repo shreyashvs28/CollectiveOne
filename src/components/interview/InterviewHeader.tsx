@@ -1,26 +1,34 @@
 import React from "react";
+import Card from "../common/Card";
 
-type InterviewHeaderProps = {
+type Props = {
+  name: string;
   role: string;
-  status: "idle" | "listening" | "processing";
+  experience: number;
+  time: string;
 };
 
-const InterviewHeader: React.FC<InterviewHeaderProps> = ({ role, status }) => {
-  const statusText =
-    status === "listening"
-      ? "Listening"
-      : status === "processing"
-      ? "Processing response"
-      : "Ready";
-
+const InterviewHeader: React.FC<Props> = ({
+  name,
+  role,
+  experience,
+  time,
+}) => {
   return (
-    <div className="d-flex justify-content-between align-items-center mb-4">
-      <div>
-        <h3 className="mb-1">HR Interview Simulation</h3>
-        <small className="text-muted">Role: {role}</small>
+    <Card className="mb-4">
+      <div className="d-flex justify-content-between align-items-center">
+        <div>
+          <h5 className="mb-1">{name}</h5>
+          <small className="text-muted">
+            Role: {role} | Experience: {experience} years
+          </small>
+        </div>
+
+        <div>
+          <strong>Time:</strong> {time}
+        </div>
       </div>
-      <span className="badge bg-secondary">{statusText}</span>
-    </div>
+    </Card>
   );
 };
 

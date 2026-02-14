@@ -1,15 +1,19 @@
 // src/types/report.ts
 
-export type CommunicationScores = {
+import { ConfidenceScores } from "./analysis";
+
+export type CommunicationBreakdown = {
   clarity: number;
   confidence: number;
   structure: number;
 };
 
 export type InterviewReport = {
+  candidateName: string;
   role: string;
+  interviewDate: string;
   overallScore: number;
-  communication: CommunicationScores;
+  confidenceScores: ConfidenceScores;
+  communication: CommunicationBreakdown;
   suggestions: string[];
-  generatedAt: number;
 };

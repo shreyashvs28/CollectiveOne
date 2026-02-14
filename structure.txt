@@ -1,76 +1,87 @@
-hr-interview-simulator/
+src/
 │
-├── public/
-│   └── favicon.svg
+├── assets/
+│   ├── images/
+│   │   └── hr-robot.png
+│   └── icons/
 │
-├── src/
-│   │
-│   ├── assets/
-│   │   ├── icons/
-│   │   └── images/
-│   │
-│   ├── components/
-│   │   ├── common/
-│   │   │   ├── Button.tsx
-│   │   │   ├── Card.tsx
-│   │   │   └── Loader.tsx
-│   │   │
-│   │   ├── interview/
-│   │   │   ├── InterviewHeader.tsx
-│   │   │   ├── InterviewControls.tsx
-│   │   │   ├── QuestionPrompt.tsx
-│   │   │   ├── TranscriptBox.tsx
-│   │   │   └── Timer.tsx
-│   │   │
-│   │   ├── analysis/
-│   │   │   ├── AudioAnalysisPanel.tsx
-│   │   │   ├── ConfidenceMeter.tsx
-│   │   │   └── FacialIndicator.tsx
-│   │   │
-│   │   └── report/
-│   │       ├── ReportSummary.tsx
-│   │       ├── CommunicationScore.tsx
-│   │       └── Suggestions.tsx
-│   │
-│   ├── hooks/
-│   │   ├── useSpeechRecognition.ts
-│   │   ├── useSpeechSynthesis.ts
-│   │   ├── useInterviewFlow.ts
-│   │   ├── useAudioAnalysis.ts
-│   │   └── useWebcam.ts
-│   │
-│   ├── pages/
-│   │   ├── HomePage.tsx
-│   │   ├── InterviewPage.tsx
-│   │   └── ReportPage.tsx
-│   │
-│   ├── services/
-│   │   ├── speechService.ts
-│   │   ├── audioService.ts
-│   │   └── webcamService.ts
-│   │
-│   ├── utils/
-│   │   ├── interviewQuestions.ts
-│   │   ├── scoring.ts
-│   │   ├── constants.ts
-│   │   └── helpers.ts
-│   │
-│   ├── types/
-│   │   ├── interview.ts
-│   │   ├── analysis.ts
-│   │   └── report.ts
-│   │
-│   ├── styles/
-│   │   └── theme.css
-│   │
-│   ├── App.tsx
-│   ├── main.tsx
-│   └── index.css
+├── components/
 │
-├── .gitignore
-├── index.html
-├── package.json
-├── tsconfig.json
-├── tsconfig.node.json
-├── vite.config.ts
-└── README.md
+│   ├── common/
+│   │   ├── Button.tsx
+│   │   ├── Card.tsx
+│   │   ├── Loader.tsx
+│   │   └── StatusIndicator.tsx
+│   │
+│   ├── setup/
+│   │   ├── BasicDetailsForm.tsx
+│   │   ├── ExperienceDetailsForm.tsx
+│   │   ├── SkillsSelectionForm.tsx
+│   │   ├── SystemCheckPanel.tsx
+│   │   └── ReviewCard.tsx
+│   │
+│   ├── interview/
+│   │   ├── InterviewHeader.tsx
+│   │   ├── HrPanel.tsx
+│   │   ├── CandidatePanel.tsx
+│   │   ├── QuestionDisplay.tsx
+│   │   ├── TranscriptBox.tsx
+│   │   ├── InterviewControls.tsx
+│   │   └── Timer.tsx
+│   │
+│   ├── analysis/
+│   │   ├── AudioAnalysisPanel.tsx
+│   │   ├── VideoAnalysisPanel.tsx
+│   │   ├── ConfidenceMeter.tsx
+│   │   └── GraphSection.tsx
+│   │
+│   └── report/
+│       ├── ReportSummary.tsx
+│       ├── CommunicationScore.tsx
+│       ├── Suggestions.tsx
+│       └── ReportActions.tsx
+│
+├── pages/
+│   ├── HomePage.tsx
+│   ├── SetupPage.tsx
+│   ├── SystemCheckPage.tsx
+│   ├── InterviewPage.tsx
+│   └── ReportPage.tsx
+│
+├── context/
+│   └── InterviewContext.tsx
+│
+├── hooks/
+│   ├── useSpeechRecognition.ts
+│   ├── useSpeechSynthesis.ts
+│   ├── useInterviewFlow.ts
+│   ├── useAudioAnalysis.ts
+│   ├── useWebcam.ts
+│   ├── useTensorflowAnalysis.ts
+│   └── useTimer.ts
+│
+├── services/
+│   ├── apiService.ts          ← future backend integration
+│   ├── speechService.ts
+│   ├── audioService.ts
+│   └── webcamService.ts
+│
+├── utils/
+│   ├── interviewQuestions.ts
+│   ├── scoring.ts
+│   ├── constants.ts
+│   ├── helpers.ts
+│   └── graphHelpers.ts
+│
+├── types/
+│   ├── interview.ts
+│   ├── analysis.ts
+│   ├── report.ts
+│   └── api.ts               ← backend contract types
+│
+├── styles/
+│   └── theme.css
+│
+├── App.tsx
+├── main.tsx
+└── index.css

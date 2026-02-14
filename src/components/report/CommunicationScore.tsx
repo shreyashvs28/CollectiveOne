@@ -1,38 +1,42 @@
 import React from "react";
 import Card from "../common/Card";
 
-type CommunicationScoreProps = {
-  clarity: number;     // 0–100
-  confidence: number;  // 0–100
-  structure: number;   // 0–100
+type Props = {
+  clarity: number;
+  confidence: number;
+  structure: number;
 };
 
-const CommunicationScore: React.FC<CommunicationScoreProps> = ({
-  clarity,
-  confidence,
-  structure,
-}) => {
-  const renderScore = (label: string, value: number) => (
+const ScoreBar = ({ label, value }: { label: string; value: number }) => {
+  const safeValue = Math.min(100, Math.max(0, value));
+
+  return (
     <div className="mb-3">
       <strong>{label}</strong>
       <div className="progress mt-1">
         <div
           className="progress-bar"
           role="progressbar"
-          style={{ width: `${value}%` }}
-          aria-valuenow={value}
+          style={{ width: `${safeValue}%` }}
+          aria-valuenow={safeValue}
           aria-valuemin={0}
           aria-valuemax={100}
         />
       </div>
     </div>
   );
+};
 
+const CommunicationScore: React.FC<Props> = ({
+  clarity,
+  confidence,
+  structure,
+}) => {
   return (
     <Card title="Communication Assessment">
-      {renderScore("Clarity of Expression", clarity)}
-      {renderScore("Confidence Indicators", confidence)}
-      {renderScore("Answer Structure", structure)}
+      <ScoreBar label="Clarity of Expression" value={clarity} />
+      <ScoreBar label="Confidence Indicators" value={confidence} />
+      <ScoreBar label="Answer Structure" value={structure} />
     </Card>
   );
 };

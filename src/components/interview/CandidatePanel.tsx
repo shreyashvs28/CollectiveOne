@@ -1,11 +1,11 @@
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import Card from "../common/Card";
 
-type CameraPreviewProps = {
+type Props = {
   stream: MediaStream | null;
 };
 
-const CameraPreview: React.FC<CameraPreviewProps> = ({ stream }) => {
+const CandidatePanel: React.FC<Props> = ({ stream }) => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
@@ -15,19 +15,17 @@ const CameraPreview: React.FC<CameraPreviewProps> = ({ stream }) => {
   }, [stream]);
 
   return (
-    <Card title="Camera Preview">
+    <Card title="Your Video">
       <video
         ref={videoRef}
         autoPlay
         muted
         playsInline
-        style={{
-          width: "100%",
-          borderRadius: "6px",
-        }}
+        width="100%"
+        style={{ borderRadius: "6px" }}
       />
     </Card>
   );
 };
 
-export default CameraPreview;
+export default CandidatePanel;

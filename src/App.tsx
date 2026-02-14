@@ -1,38 +1,47 @@
 import { useState } from "react";
 
 import HomePage from "./pages/HomePage";
+import SetupPage from "./pages/SetupPage";
+import SystemCheckPage from "./pages/SystemCheckPage";
 import InterviewPage from "./pages/InterviewPage";
 import ReportPage from "./pages/ReportPage";
 
-type Page = "home" | "interview" | "report";
+type Page =
+  | "home"
+  | "setup"
+  | "system-check"
+  | "interview"
+  | "report";
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<Page>("home");
+  const [page, setPage] = useState<Page>("home");
 
-  const startInterview = () => {
-    setCurrentPage("interview");
-  };
-
-  const finishInterview = () => {
-    setCurrentPage("report");
-  };
-
-  const restartInterview = () => {
-    setCurrentPage("home");
-  };
+  const goToHome = () => setPage("home");
+  const goToSetup = () => setPage("setup");
+  const goToSystemCheck = () => setPage("system-check");
+  const goToInterview = () => setPage("interview");
+  const goToReport = () => setPage("report");
 
   return (
     <>
-      {currentPage === "home" && (
-        <HomePage onStart={startInterview} />
+      {page === "home" && (
+        <HomePage onStart={goToSetup} />
       )}
 
-      {currentPage === "interview" && (
-        <InterviewPage onFinish={finishInterview} />
+      {page === "setup" && (
+        <SetupPage onNext={goToSystemCheck} />
       )}
 
-      {currentPage === "report" && (
-        <ReportPage onRestart={restartInterview} />
+      {page === "system-check" && (
+        <SystemCheckPage onNext={goToInterview} />
+      )}
+
+      {page === "interview" && (
+        <InterviewPage onFinish={goToReport} />
+      )}
+
+      {page === "report" && (
+        <ReportPage onRestart={goToHome} />
       )}
     </>
   );

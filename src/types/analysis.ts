@@ -1,13 +1,18 @@
 // src/types/analysis.ts
 
-export type AudioAnalysis = {
+export type AudioAnalysisResult = {
   wordCount: number;
   fillerCount: number;
   speechRate: number;
-  pauseCount: number;
 };
 
-export type VisualAnalysis = {
+export type VideoAnalysisResult = {
   faceDetected: boolean;
-  lookingForward: boolean;
+  stabilityScore: number;
+};
+
+export type ConfidenceScores = {
+  audioConfidence: number;
+  videoConfidence: number;
+  overallConfidence: number;
 };

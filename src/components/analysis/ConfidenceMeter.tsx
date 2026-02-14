@@ -1,29 +1,32 @@
 import React from "react";
 import Card from "../common/Card";
 
-type ConfidenceMeterProps = {
-  confidenceScore: number; // 0–100
+type Props = {
+  score: number; // 0 - 100
 };
 
-const ConfidenceMeter: React.FC<ConfidenceMeterProps> = ({
-  confidenceScore,
-}) => {
-  const clampedScore = Math.min(100, Math.max(0, confidenceScore));
+const ConfidenceMeter: React.FC<Props> = ({ score }) => {
+  const safeScore = Math.min(100, Math.max(0, score));
 
   return (
-    <Card title="Confidence Indicator">
+    <Card title="Overall Confidence Indicator">
       <div className="progress">
         <div
           className="progress-bar"
           role="progressbar"
-          style={{ width: `${clampedScore}%` }}
-          aria-valuenow={clampedScore}
+          style={{ width: `${safeScore}%` }}
+          aria-valuenow={safeScore}
           aria-valuemin={0}
           aria-valuemax={100}
         />
       </div>
-      <small className="text-muted d-block mt-2">
-        Indicative score based on speech patterns
+
+      <div className="mt-2">
+        <strong>{safeScore}/100</strong>
+      </div>
+
+      <small className="text-muted">
+        Derived from communication and presence metrics.
       </small>
     </Card>
   );

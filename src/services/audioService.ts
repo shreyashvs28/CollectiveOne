@@ -1,6 +1,10 @@
 // src/services/audioService.ts
 
-export const countFillerWords = (
+export const calculateWordCount = (transcript: string) => {
+  return transcript.trim().split(/\s+/).filter(Boolean).length;
+};
+
+export const calculateFillerWords = (
   transcript: string,
   fillers: string[] = ["uh", "um", "like", "you know"]
 ) => {
@@ -8,10 +12,10 @@ export const countFillerWords = (
   return words.filter((word) => fillers.includes(word)).length;
 };
 
-export const estimateSpeechRate = (
+export const calculateSpeechRate = (
   wordCount: number,
   durationSeconds: number
 ) => {
-  if (durationSeconds === 0) return 0;
+  if (durationSeconds <= 0) return 0;
   return Math.round((wordCount / durationSeconds) * 60);
 };

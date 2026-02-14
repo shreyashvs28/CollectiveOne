@@ -1,29 +1,26 @@
 import React from "react";
 import Card from "../common/Card";
 
-type AudioAnalysisPanelProps = {
-  speechRate: number; // words per minute
+type Props = {
+  wordCount: number;
+  speechRate: number;
   fillerCount: number;
-  pauseCount: number;
+  duration: number;
 };
 
-const AudioAnalysisPanel: React.FC<AudioAnalysisPanelProps> = ({
+const AudioAnalysisPanel: React.FC<Props> = ({
+  wordCount,
   speechRate,
   fillerCount,
-  pauseCount,
+  duration,
 }) => {
   return (
-    <Card title="Speech Analysis">
+    <Card title="Audio Analysis">
       <ul className="list-unstyled mb-0">
-        <li>
-          <strong>Speech Rate:</strong> {speechRate} wpm
-        </li>
-        <li>
-          <strong>Filler Words:</strong> {fillerCount}
-        </li>
-        <li>
-          <strong>Long Pauses:</strong> {pauseCount}
-        </li>
+        <li><strong>Total Words:</strong> {wordCount}</li>
+        <li><strong>Speech Rate:</strong> {speechRate} WPM</li>
+        <li><strong>Filler Words:</strong> {fillerCount}</li>
+        <li><strong>Answer Duration:</strong> {duration} sec</li>
       </ul>
     </Card>
   );
